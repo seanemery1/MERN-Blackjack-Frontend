@@ -146,7 +146,7 @@ const App = () => {
         if(mounted.current) {
           setAlert(false);
         }
-      }, 1)
+      }, 10)
     }
   }, [alert])
   
