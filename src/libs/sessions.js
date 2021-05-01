@@ -3,7 +3,7 @@ import * as Cookies from "js-cookie";
 export const setSessionCookie = (session) => {
   console.log("setSessionCookie");
   Cookies.remove("session");
-  Cookies.set("session", session, { expires: 14 });
+  Cookies.set("session", session, { expires: 14, sameSite:'lax'});
 };
 
 export const getSessionCookie = () => {

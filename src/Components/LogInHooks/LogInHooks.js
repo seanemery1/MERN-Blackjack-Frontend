@@ -96,19 +96,28 @@ const LogInHooks = () => {
         clientId,
         isSignedIn: true,
         onFailure,
-        accessType: 'offline'
+        accessType: 'offline',
+        icon: true
       });
 
     if (loading) {
         return <h1>Loggin in...</h1>
     } 
     return (
-        <button onClick={signIn} className ="button">
-            <img src="icons/google.svg"></img>
-            <span className="buttonTest">Sign in or Log in with Google</span>
-        </button>
+        <div id="gSignInWrapper">
+            <span class="label">Sign in with:</span>
+            <div id="customBtn" className="customGPlusSignIn" onClick={signIn}>
+                <span className="icon"></span>
+                <span className="buttonText">Google</span>
+            </div>
+        </div>
     );
 };
+
+// <button onClick={signIn} className ="button">
+//             <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"></img>
+//             <span className="buttonText">Sign in or Log in with Google</span>
+//         </button>
 // const initialState = {
     //     name: "",
     //     email: "",

@@ -8,18 +8,10 @@ import { Redirect } from "react-router";
 import { getSessionCookie } from '../../libs/sessions.js';
 import { setSessionCookie } from '../../libs/sessions.js';
 const User = () => {
-    // const myContext = useContext(UserContext);
-    const {userInfo, setInfo, setAlert} = useContext(UserContext);
-    // useEffect(() => {
-    //     console.log("hi useEffect")
-    // }, [userInfo.gameSession]);
-    // useEffect(
-    //     () => {
-    //       getSessionCookie();
-    //     },
-    //     [userInfo]
-    // );
-    const _clicked = () => {
+
+    const {userInfo, setInfo, setAlert, refreshUpdate} = useContext(UserContext);
+ 
+    const  _clicked = async () => {
 
         if (userInfo.gameID === undefined||userInfo.gameSession['canLeave']) {
             console.log("succ");
@@ -27,10 +19,10 @@ const User = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    balance: userInfo.balance,
+                    resume: false,
                 })
             };
-            fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}`, requestOptions)
+            await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}`, requestOptions)
             .then(response => response.json())
             .then(
                 (data) => {
@@ -54,51 +46,9 @@ const User = () => {
                                 gameID: data._id,
                                 gameSession: data
                             });
-                // setInfo({
-                //     isLoggedIn: data.isLoggedIn,
-                //     name: data.name,
-                //     email: data.email,
-                //     password: data.password,
-                //     uuid: data.uuid,
-                //     balance: data.balance,
-                //     gameID: data.gameID,
-                //     gameSession: data.gameSession
-                // });
-                // setSessionCookie({
-                //     isLoggedIn: data.isLoggedIn,
-                //     name: data.name,
-                //     email: data.email,
-                //     password: data.password,
-                //     uuid: data.uuid,
-                //     balance: data.balance,
-                //     gameID: data.gameID,
-                //     gameSession: data.gameSession
-                // });
-        });
-        // setInfo(
-        //  userInfo
-        //             )
-        // );
-            //     setUserInfo({
-            //         isLoggedIn: userInfo.isLoggedIn,
-            //         name: userInfo.name,
-            //         email: userInfo.email,
-            //         uuid: userInfo.uuid,
-            //         balance: userInfo.balance,
-            //         // gameID: data._id,
-            //         gameSession: data
-            // });
-            //     setSessionCookie({
-            //         isLoggedIn: userInfo.isLoggedIn,
-            //         name: userInfo.name,
-            //         email: userInfo.email,
-            //         uuid: userInfo.uuid,
-            //         balance: userInfo.balance,
-            //         // gameID: data._id,
-            //         gameSession: data
-            //     });
-            // });
-            // history.push("/GameSession");
+               
+        }).then(refreshUpdate);
+ 
             return window.location.href=`/GameSession/${userInfo.uuid}`;//(<Redirect to="/GameSession"/>)
         } else {
             console.log("fail");
@@ -120,7 +70,7 @@ const User = () => {
             </div>
         }
             
-        return (<div className="home">
+        return (<div className="user">
             <LogOutHooks></LogOutHooks>
             {/* <div className="go" onClick={clicked}>Go</div> */}
             <h1>value:{userInfo.email}</h1>
@@ -131,7 +81,7 @@ const User = () => {
             {button}
         </div>); 
     } else {
-        return(<div>
+        return(<div className="user">
             <h1>Loading...</h1>
             <LogOutHooks></LogOutHooks>
         </div>);

@@ -5,7 +5,6 @@ import { useGoogleLogout} from 'react-google-login';
 import { setSessionCookie, getSessionCookie } from '../../libs/sessions.js';
 
 import * as Cookies from "js-cookie";
-import {withRouter} from "react-router";
 
 const clientId = '851365912464-kpi9s2l4bebr8cn548ghsoslp35ckops.apps.googleusercontent.com';
 // class LogIn extends React.Component {
@@ -111,13 +110,14 @@ const LogOutHooks = () => {
         clientId,
         onLogoutSuccess,
         onFailure,
+        icon: true
     });
 
        
     return (
         <button onClick={signOut} className ="button">
             <img src="icons/google.svg"></img>
-            <span className="buttonTest">Sign Out</span>
+            <span className="buttonText">Sign Out</span>
         </button>
     );
 };

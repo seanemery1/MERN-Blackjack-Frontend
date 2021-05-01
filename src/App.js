@@ -150,7 +150,7 @@ const App = () => {
     }
   }, [alert])
   
-  const handleSubmit = () => {
+  const refreshUpdate = () => {
     
     // setUserInfo(getSessionCookie());
     setAlert(true);
@@ -161,8 +161,8 @@ const App = () => {
   // }
   return(
     <div className="App">
-      {alert && <h2>Submit Successful</h2>}
-      <UserContext.Provider value={{userInfo: userInfo, setInfo, handleSubmit, alert: alert, setAlert}}>
+      {/* {alert && <h2>Submit Successful</h2>} */}
+      <UserContext.Provider value={{userInfo: userInfo, setInfo, refreshUpdate, alert: alert, setAlert}}>
         <Routes />
       </UserContext.Provider>
       
