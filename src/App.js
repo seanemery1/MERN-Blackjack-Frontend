@@ -96,7 +96,7 @@ const App = () => {
 
 
       async function getData(){
-        return await fetch(`http://localhost:5000/GetLastGame/${userInfo.uuid}`)
+        return await fetch(`http://blackjackserver.herokuapp.com/GetLastGame/${userInfo.uuid}`)
         .then(response => response.json())
       }
 

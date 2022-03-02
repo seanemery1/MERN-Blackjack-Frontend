@@ -22,7 +22,7 @@ const User = () => {
                     resume: false,
                 })
             };
-            await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}`, requestOptions)
+            await fetch(`http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}`, requestOptions)
             .then(response => response.json())
             .then(
                 (data) => {

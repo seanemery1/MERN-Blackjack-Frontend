@@ -55,7 +55,7 @@ const LogInHooks = () => {
         //     });
         // });
         setLoading(false);
-        fetch(`http://localhost:5000/LogIn`, requestOptions)
+        fetch(`http://blackjackserver.herokuapp.com/LogIn`, requestOptions)
         .then(response => response.json())
         .then((data) => {
             setInfo({

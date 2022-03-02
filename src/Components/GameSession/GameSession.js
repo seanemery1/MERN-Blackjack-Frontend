@@ -22,7 +22,7 @@ const GameSession = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         };
-        fetch(`http://localhost:5000/DeleteGameSession/${userInfo.uuid}/${userInfo.gameID}`, requestOptions)
+        fetch(`http://blackjackserver.herokuapp.com/DeleteGameSession/${userInfo.uuid}/${userInfo.gameID}`, requestOptions)
         .then(response => response.json())
         .then((data) => {
             //setUserInfo({
@@ -63,13 +63,13 @@ const GameSession = () => {
         };
         let url;
         if (action==='split') {
-            url = `http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Split`;
+            url = `http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Split`;
             console.log(action);
             await fetch(url, requestOptions)
             .then(response => response.json())
             .then(refreshUpdate);
         } else if (action==='hit') {
-            url = `http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Hit/${hand}`;
+            url = `http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Hit/${hand}`;
             console.log(action);
             await fetch(url, requestOptions)
             .then(response => response.json())
@@ -80,7 +80,7 @@ const GameSession = () => {
             // }  
         } else if (action==='standDouble') {
             console.log(action);
-            url = `http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/StandDouble/${hand}`;
+            url = `http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/StandDouble/${hand}`;
             if (double) {
                 await fetch(url, requestOptions)
                 .then(response => response.json());
@@ -112,7 +112,7 @@ const GameSession = () => {
                     bet:(bet)
                 }) 
             };
-            await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/PlaceBets`, requestOptions)
+            await fetch(`http://blackjackserver.heroku.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/PlaceBets`, requestOptions)
             .then(response => response.json())
             .then(refreshUpdate)
             .then(() => deal());
@@ -129,7 +129,7 @@ const GameSession = () => {
                 deckID: userInfo.gameSession['deck']['deckID']
             }) 
         };
-        await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Deal`, requestOptions)
+        await fetch(`http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Deal`, requestOptions)
         .then(response => response.json()).then(refreshUpdate);
          
     }
@@ -169,7 +169,7 @@ const GameSession = () => {
                     deckID: userInfo.gameSession['deck']['deckID']
                 }) 
             };
-            await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Dealer`, requestOptions)
+            await fetch(`http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}/${userInfo.gameSession['_id']}/Dealer`, requestOptions)
             .then(await new Promise(resolve => setTimeout(resolve, 2000)))
             .then(response => response.json()).then((data) => {dealerLoop(data.nextMove)}).then(refreshUpdate);
             // setTimeout(function() {return;}, 1000);
@@ -193,7 +193,7 @@ const GameSession = () => {
                 
             })
         };
-        await fetch(`http://localhost:5000/NewGameSession/${userInfo.uuid}`, requestOptions)
+        await fetch(`http://blackjackserver.herokuapp.com/NewGameSession/${userInfo.uuid}`, requestOptions)
             .then(response => response.json())
             .then(await new Promise(resolve => setTimeout(resolve, 2000)))
             .then(
